@@ -126,17 +126,19 @@ public class DrawView extends View
 			
 			//Need to return a float[] to stop the cannot invoke getxxx on float primitive,
 			//because a float[] is an object, not a primitive.
-		}
-		
-		for (int yCount = 0; yCount < circlesArrayY.length;yCount++) {
+				
+				for (int yCount = 0; yCount < circlesArrayY.length;yCount++) {
+					
+					//circlesArrayY[yCount].getYCirclesArrayCoOrdinates();
+					
+					//Need to return a float[] to stop the cannot invoke getxxx on float primitive,
+					//because a float[] is an object, not a primitive.
 			
-			//circlesArrayY[yCount].getYCirclesArrayCoOrdinates();
-			
-			//Need to return a float[] to stop the cannot invoke getxxx on float primitive,
-			//because a float[] is an object, not a primitive.
 		}
-		
-	}
+				//Check loop bracing to ensure proper operation!
+    }
+}
+	
 
 	public DrawView(Context context)
 
