@@ -57,6 +57,21 @@ public class DrawView extends View
 	float xArrayPythagNumberB;
 	
 	float xArrayAnswerC;
+	
+	/* The "pythagorasSquareRoot" variables refer to the result obtained by square rooting 
+	 * "pythagorasSquareRootA" and "pythagorasSquareRootB" respectively.
+	 * 
+	 */
+	
+	/* "pythagorasSquareRootA" and "pythagorasSquareRootB" are doubles, because Math.sqrt only
+	 * outputs doubles as the product of the calculation, not floats, unless specifically casted for.
+	 * Furthermore, in this instance, we do not want the result to be casted from a double to a float
+	 * for reasons of avoiding imprecision.
+	 * 
+	 */
+	double pythagorasSquareRootA;
+	
+	double pythagorasSquareRootB;
 
 	float yArrayPythagNumberA;
 
@@ -85,18 +100,16 @@ public class DrawView extends View
 		for (int i = 0; i < xCountTempStorage.length; i++) {
 			
 			xCountTempStorage[i] = circlesArrayX[xCount];
-			
-			if (circlesArrayX[xCount] > circlesArrayY[yCount]) {
 				
-				deltax[i] = deltax[i] * -1;
+				pythagorasCollisionDetection();
 				
 			}
 			
-		}
 		/* "aFloat" is only a temporary variable,
 		 *  instituted to stop compile errors for the time being.
 		 */
-		return aFloatArray;
+		return xCountTempStorage[i];
+	}
 		
 		/* Need to have an if statement in this accessor saying that if the distance of "X"[i] is 
 		 * bigger than "Y"[i], then do something.
@@ -104,21 +117,13 @@ public class DrawView extends View
 
 		//return aFloatArray; //However instead of aFloatArray[]
 		//Return (instead) a result that makes them bounce off one another.
-		
-	}
 	
 	public float[] getYCirclesArrayCoOrdinates(int yCount, int xCount) {
 		
-		float aFloat = 0;
-		float[] aFloatArray = new float[1];
-		
-		/* "aFloat" is only a temporary variable,
-		 *  instituted to stop compile errors for the time being.
-		 */
 		
 		float[] yCountTempStorage = new float[5];
 		
-		for (int i = 0; i < xCountTempStorage.length; i++) {
+		for (int i = 0; i < yCountTempStorage.length; i++) {
 			yCountTempStorage[i] = circlesArrayY[yCount];
 			
 			//Should say "if circlesArrayY[yCount] < coOrdDistance && < RADIUS (of both circles).
@@ -130,7 +135,7 @@ public class DrawView extends View
 		
 	}
 		
-		return aFloatArray; //However instead of aFloatArray[]
+		return yCountTempStorage[i]; //However instead of aFloatArray[]
 		//Return (instead) a result that makes them bounce off one another.
 }
 	
@@ -138,12 +143,64 @@ public class DrawView extends View
 	
 	public void pythagorasCollisionDetection() {
 		
+		/*
+		 * These for loops correspond to Part C: "Use a nested for loop to..."
+		 */
+		
+		for (int i = 0; i < circlesArrayX.length && i < circlesArrayY.length; i++) {
+			
+			circlesArrayX.getXCirclesArrayCoOrdinates();
+			circlesArrayY.getYCirclesArrayCoOrdinates();
+		
+		
+		/*
+		 * The for loop below is "Part Two" of Part C. i.e. using Pythagoras to calculate the
+		 * distance between each circle. Above this comment is "Part One".
+		 */
+		
+		
 		for (int xCount = 0; xCount < circlesArrayX.length; xCount++) {
 			
-			//circlesArrayX[xCount].getXCirclesArrayCoOrdinates();
+			xArrayPythagNumberA = circlesArrayX[xCount] * circlesArrayX[xCount];
 			
-			//Need to return a float[] to stop the cannot invoke getxxx on float primitive,
-			//because a float[] is an object, not a primitive.
+			System.out.println("The value of xArrayPythagA is: " + xArrayPythagNumberA);
+			
+			xArrayPythagNumberB = circlesArrayX[xCount] * circlesArrayX[xCount];
+			
+			xArrayAnswerC = xArrayPythagNumberB + xArrayPythagNumberA;
+			
+			pythagorasSquareRootA = Math.sqrt(xArrayAnswerC);
+			
+			//Nest the x and y search loops. X comes before Y.
+			
+		for (int yCount = 0; yCount < circlesArrayY.length; yCount++) {
+			
+			yArrayPythagNumberA = circlesArrayY[yCount] * circlesArrayY[yCount];
+			
+			yArrayPythagNumberB = circlesArrayY[yCount] * circlesArrayY[yCount];
+			
+			yArrayAnswerC = yArrayPythagNumberB + yArrayPythagNumberA;
+			
+			pythagorasSquareRootB = Math.sqrt(yArrayAnswerC);
+		}
+	}		
+}			
+			
+			/*The two sets of numbers should match.
+			*If they don't something is wrong, and needs to be corrected.
+			*If so, set "xCount" to "0" in between statement executions?
+			*
+			* i.e statement1;
+			* 
+			* xCount = 0;
+			* 
+			* statement2;  <---- Like this block of code.
+			*
+			*(the three lines above this one).
+			*/
+			
+			System.out.println("The value of xArrayPythagB is: " + xArrayPythagNumberB);
+			System.out.println("This text is here so I can see the value of xArrayPythagB via a breakpoint");
 				
 				for (int yCount = 0; yCount < circlesArrayY.length;yCount++) {
 					
@@ -155,7 +212,7 @@ public class DrawView extends View
 		}
 				//Check loop bracing to ensure proper operation!
     }
-}
+
 	
 
 	public DrawView(Context context)
@@ -212,7 +269,7 @@ public class DrawView extends View
 			}
 			
 			//Collision detection things begin below this line.
-			
+			pythagorasCollisionDetection();
 		}
 		invalidate();
 	}
