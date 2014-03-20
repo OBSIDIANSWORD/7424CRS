@@ -47,6 +47,24 @@ public class DrawView extends View
 	float[] circlesArrayX = {30, 60, 120, 170, 220};
 
 	float[] circlesArrayY = {30, 60, 120, 170, 220};
+	
+	/* The instance variables below are for the Pythagorean Theorem to be used in this app. 
+	 * 
+	 */
+	
+	float xArrayPythagNumberA;
+
+	float xArrayPythagNumberB;
+	
+	float xArrayAnswerC;
+
+	float yArrayPythagNumberA;
+
+	float yArrayPythagNumberB;
+
+	float yArrayAnswerC;
+	
+	//End of Pythagorean Theorem Variables.
 
 
 	float x = 0;
