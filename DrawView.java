@@ -44,9 +44,37 @@ public class DrawView extends View
 	
 	float[] yCountTempStorage;
 
-	float[] circlesArrayX = {30, 60, 120, 170, 220};
+	/* The instance variables below are used for Part E, Challenge Question 1, in regards
+	 * to random x and y coordinates. The numbers "One" "Two" and so forth correspond to the amount
+	 * of positions available in circlesArrayX and circlesArrayY, respectively. There are five such
+	 * positions in each array.
+	 * 
+	 */
+	
+	float randomXCoOrdinateOne;
+	float randomXCoOrdinateTwo;
+	float randomXCoOrdinateThree;
+	float randomXCoOrdinateFour;
+	float randomXCoOrdinateFive;
+	
+	float randomYCoOrdinateOne;
+	float randomYCoOrdinateTwo;
+	float randomYCoOrdinateThree;
+	float randomYCoOrdinateFour;
+	float randomYCoOrdinateFive;
+	
+	/*
+	 * These two arrays below are NOT part of the challenge question. They're placed here,
+	 * so that I can use the "randomX" and "randomY" variables just above this comment.
+	 */
+	
+	float[] circlesArrayX = {randomXCoOrdinateOne, randomXCoOrdinateTwo, randomXCoOrdinateThree, randomXCoOrdinateFour, randomXCoOrdinateFive};
 
-	float[] circlesArrayY = {30, 60, 120, 170, 220};
+	float[] circlesArrayY = {randomYCoOrdinateOne, randomYCoOrdinateTwo, randomYCoOrdinateThree, randomYCoOrdinateFour, randomYCoOrdinateFive};
+	
+	/* End of Part E, Challenge Question 1 instance variables.
+	 * 
+	 */
 	
 	/* The instance variables below are for the Pythagorean Theorem to be used in this app. 
 	 * 
@@ -59,7 +87,8 @@ public class DrawView extends View
 	float xArrayAnswerC;
 	
 	/* The "pythagorasSquareRoot" variables refer to the result obtained by square rooting 
-	 * "pythagorasSquareRootA" and "pythagorasSquareRootB" respectively.
+	 * "pythagorasSquareRootA" for the circlesXArray, 
+	 *  and "pythagorasSquareRootB" for the circlesYArray respectively.
 	 * 
 	 */
 	
@@ -90,7 +119,7 @@ public class DrawView extends View
 
 	float deltay[] = {SPEED_FLOAT, -SPEED_FLOAT, SPEED_FLOAT, -SPEED_FLOAT, SPEED_FLOAT};
 	
-	public float[] getXCirclesArrayCoOrdinates(int xCount, int yCount) {
+	/* public float[] getXCirclesArrayCoOrdinates(int xCount, int yCount) {
 		
 		
 		float[] aFloatArray = new float[1];
@@ -108,9 +137,9 @@ public class DrawView extends View
 		/* "aFloat" is only a temporary variable,
 		 *  instituted to stop compile errors for the time being.
 		 */
-		return xCountTempStorage[i];
-	}
-		
+		//return xCountTempStorage[i];
+	//}
+
 		/* Need to have an if statement in this accessor saying that if the distance of "X"[i] is 
 		 * bigger than "Y"[i], then do something.
 		 */
@@ -118,7 +147,45 @@ public class DrawView extends View
 		//return aFloatArray; //However instead of aFloatArray[]
 		//Return (instead) a result that makes them bounce off one another.
 	
-	public float[] getYCirclesArrayCoOrdinates(int yCount, int xCount) {
+	/* The method below seeds random x and y coordinates for the circles, and is a challenge question
+	 * response.
+	 * 
+	 */
+	public void seedRandomCircles() {
+
+		randomXCoOrdinateOne = (float)(Math.random()* 180) + 1;
+		randomXCoOrdinateTwo = (float)(Math.random()* 180) + 1;
+		randomXCoOrdinateThree = (float)(Math.random()* 180) + 1;
+		randomXCoOrdinateFour = (float)(Math.random()* 180) + 1;
+		randomXCoOrdinateFive = (float)(Math.random()* 180) + 1;
+		
+		randomYCoOrdinateOne = (float)(Math.random()* 180) + 1;
+		randomYCoOrdinateTwo = (float)(Math.random()* 180) + 1;
+		randomYCoOrdinateThree = (float)(Math.random()* 180) + 1;
+		randomYCoOrdinateFour = (float)(Math.random()* 180) + 1;
+		randomYCoOrdinateFive = (float)(Math.random()* 180) + 1;
+
+		for (int i = 0;  i < circlesArrayX.length; i++) {
+		circlesArrayX[i] = randomXCoOrdinateOne;
+		circlesArrayX[i] = randomXCoOrdinateTwo;
+		circlesArrayX[i] = randomXCoOrdinateThree;
+		circlesArrayX[i] = randomXCoOrdinateFour;
+		circlesArrayX[i] = randomXCoOrdinateFive;
+	
+   }
+		
+	   for (int i = 0; i < circlesArrayY.length; i++) {
+		   
+		    circlesArrayY[i] = randomYCoOrdinateOne;
+			circlesArrayY[i] = randomYCoOrdinateTwo;
+			circlesArrayY[i] = randomYCoOrdinateThree;
+			circlesArrayY[i] = randomYCoOrdinateFour;
+			circlesArrayY[i] = randomYCoOrdinateFive;
+		   
+	   }
+}
+	
+	/* public float[] getYCirclesArrayCoOrdinates(int yCount, int xCount) {
 		
 		
 		float[] yCountTempStorage = new float[5];
@@ -129,16 +196,12 @@ public class DrawView extends View
 			//Should say "if circlesArrayY[yCount] < coOrdDistance && < RADIUS (of both circles).
 			//then bounce the y co-ordinate ball away from the x co-ordinate ball.
 			
-			if (circlesArrayY[yCount] <  circlesArrayX[xCount]) {
-			deltay[i] = deltay[i] * -1;
 		}
-		
-	}
 		
 		return yCountTempStorage[i]; //However instead of aFloatArray[]
 		//Return (instead) a result that makes them bounce off one another.
 }
-	
+	*/
 	//Collision detection things begin below this line.
 	
 	public void pythagorasCollisionDetection() {
@@ -149,8 +212,8 @@ public class DrawView extends View
 		
 		for (int i = 0; i < circlesArrayX.length && i < circlesArrayY.length; i++) {
 			
-			circlesArrayX.getXCirclesArrayCoOrdinates();
-			circlesArrayY.getYCirclesArrayCoOrdinates();
+			//circlesArrayX.getXCirclesArrayCoOrdinates();
+			//circlesArrayY.getYCirclesArrayCoOrdinates();
 		
 		
 		/*
@@ -201,7 +264,7 @@ public class DrawView extends View
 			
 			System.out.println("The value of xArrayPythagB is: " + xArrayPythagNumberB);
 			System.out.println("This text is here so I can see the value of xArrayPythagB via a breakpoint");
-				
+			System.out.println("The value of xArrayPythagB (once again) is: " + xArrayPythagNumberB);	
 				for (int yCount = 0; yCount < circlesArrayY.length;yCount++) {
 					
 					//circlesArrayY[yCount].getYCirclesArrayCoOrdinates();
