@@ -29,6 +29,17 @@ public class DrawView extends View
 	 * So, when xCount = 0;, we're accessing element nr. [0]'s data by de-referencing it.
 	 */
 	
+	float dispX; //The X co-ordinate the circle is seen at onscreen.
+	
+	float dispY; //The Y co-ordinate the circle is seen at onscreen.
+	
+	float currentX;
+	
+	float currentY;
+	
+	float currX; //The current "x" coordinate being used in the Pythagoras Theorem.
+	
+	float currY; //The current "y" coordinate being used in the Pythagoras Theorem.
 	
 	int xCount;
 
@@ -40,9 +51,6 @@ public class DrawView extends View
 	 * respective accessors, are not lost, immediately after being "gotten."
 	 */
 	
-	float[] xCountTempStorage;
-	
-	float[] yCountTempStorage;
 
 	/* The instance variables below are used for Part E, Challenge Question 1, in regards
 	 * to random x and y coordinates. The numbers "One" "Two" and so forth correspond to the amount
@@ -62,6 +70,7 @@ public class DrawView extends View
 	float randomYCoOrdinateThree;
 	float randomYCoOrdinateFour;
 	float randomYCoOrdinateFive;
+	
 	
 	/*
 	 * These two arrays below are NOT part of the challenge question. They're placed here,
@@ -119,33 +128,12 @@ public class DrawView extends View
 
 	float deltay[] = {SPEED_FLOAT, -SPEED_FLOAT, SPEED_FLOAT, -SPEED_FLOAT, SPEED_FLOAT};
 	
-	/* public float[] getXCirclesArrayCoOrdinates(int xCount, int yCount) {
-		
-		
-		float[] aFloatArray = new float[1];
-		
-		float[] xCountTempStorage = new float[5];
-		
-		for (int i = 0; i < xCountTempStorage.length; i++) {
-			
-			xCountTempStorage[i] = circlesArrayX[xCount];
-				
-				pythagorasCollisionDetection();
-				
-			}
-			
-		/* "aFloat" is only a temporary variable,
-		 *  instituted to stop compile errors for the time being.
-		 */
-		//return xCountTempStorage[i];
-	//}
-
-		/* Need to have an if statement in this accessor saying that if the distance of "X"[i] is 
-		 * bigger than "Y"[i], then do something.
-		 */
-
-		//return aFloatArray; //However instead of aFloatArray[]
-		//Return (instead) a result that makes them bounce off one another.
+	
+	/* The nested for loops below search through the x and y arrays, and compare their values with
+	 * one another.
+	 * 
+	 */
+	
 	
 	/* The method below seeds random x and y coordinates for the circles, and is a challenge question
 	 * response.
@@ -174,6 +162,8 @@ public class DrawView extends View
 	
    }
 		
+		
+		
 	   for (int i = 0; i < circlesArrayY.length; i++) {
 		   
 		    circlesArrayY[i] = randomYCoOrdinateOne;
@@ -185,23 +175,22 @@ public class DrawView extends View
 	   }
 }
 	
-	/* public float[] getYCirclesArrayCoOrdinates(int yCount, int xCount) {
-		
-		
-		float[] yCountTempStorage = new float[5];
-		
-		for (int i = 0; i < yCountTempStorage.length; i++) {
-			yCountTempStorage[i] = circlesArrayY[yCount];
+	/*
+	 * This is "Part One" of Part C, where we have to search through both the x and y arrays.
+	 */
+	
+	public void searchThroughArraysForValues() {
+		for (int i = 0; i < circlesArrayX.length; i++) {
+			 currentX = circlesArrayX[i];
+			 currentY = circlesArrayY[i];
+		for (int j = 0; j < circlesArrayX.length && j < circlesArrayX.length;  j++) {
 			
-			//Should say "if circlesArrayY[yCount] < coOrdDistance && < RADIUS (of both circles).
-			//then bounce the y co-ordinate ball away from the x co-ordinate ball.
-			
+			float dispX = currentX - circlesArrayX[j];
+			float dispY = currentY - circlesArrayY[j];
+		 }
 		}
-		
-		return yCountTempStorage[i]; //However instead of aFloatArray[]
-		//Return (instead) a result that makes them bounce off one another.
-}
-	*/
+	}
+	
 	//Collision detection things begin below this line.
 	
 	public void pythagorasCollisionDetection() {
@@ -210,10 +199,6 @@ public class DrawView extends View
 		 * These for loops correspond to Part C: "Use a nested for loop to..."
 		 */
 		
-		for (int i = 0; i < circlesArrayX.length && i < circlesArrayY.length; i++) {
-			
-			//circlesArrayX.getXCirclesArrayCoOrdinates();
-			//circlesArrayY.getYCirclesArrayCoOrdinates();
 		
 		
 		/*
@@ -222,32 +207,31 @@ public class DrawView extends View
 		 */
 		
 		
-		for (int xCount = 0; xCount < circlesArrayX.length; xCount++) {
+		for (int count = 0; count < circlesArrayX.length; count++) {
 			
-			xArrayPythagNumberA = circlesArrayX[xCount] * circlesArrayX[xCount];
+			float currX = circlesArrayX[count];
+			float currY = circlesArrayY[count];
 			
-			System.out.println("The value of xArrayPythagA is: " + xArrayPythagNumberA);
-			
-			xArrayPythagNumberB = circlesArrayX[xCount] * circlesArrayX[xCount];
-			
-			xArrayAnswerC = xArrayPythagNumberB + xArrayPythagNumberA;
-			
-			pythagorasSquareRootA = Math.sqrt(xArrayAnswerC);
-			
-			//Nest the x and y search loops. X comes before Y.
-			
-		for (int yCount = 0; yCount < circlesArrayY.length; yCount++) {
-			
-			yArrayPythagNumberA = circlesArrayY[yCount] * circlesArrayY[yCount];
-			
-			yArrayPythagNumberB = circlesArrayY[yCount] * circlesArrayY[yCount];
-			
-			yArrayAnswerC = yArrayPythagNumberB + yArrayPythagNumberA;
-			
-			pythagorasSquareRootB = Math.sqrt(yArrayAnswerC);
+			System.out.println("The value of 'currX' is: " + "and the value of 'currY' is: " + currY);
 		}
-	}		
-}			
+		
+		for (int k = 0; k < circlesArrayX.length; k++) {
+			float pointX;
+			float pointY;
+			
+			pointX = circlesArrayX[k];
+			pointY = circlesArrayY[k];
+			
+			float diffX = pointX - currX;
+			float diffY = pointY - currY;
+			
+			//This is calculating pythagoras below.
+			Math.sqrt(diffX * diffX + diffY * diffY);
+			
+			float distance = (float)Math.sqrt(diffX * diffX + diffY * diffY);
+		}	
+			//Nest the x and y search loops. X comes before Y.
+		}
 			
 			/*The two sets of numbers should match.
 			*If they don't something is wrong, and needs to be corrected.
@@ -262,19 +246,6 @@ public class DrawView extends View
 			*(the three lines above this one).
 			*/
 			
-			System.out.println("The value of xArrayPythagB is: " + xArrayPythagNumberB);
-			System.out.println("This text is here so I can see the value of xArrayPythagB via a breakpoint");
-			System.out.println("The value of xArrayPythagB (once again) is: " + xArrayPythagNumberB);	
-				for (int yCount = 0; yCount < circlesArrayY.length;yCount++) {
-					
-					//circlesArrayY[yCount].getYCirclesArrayCoOrdinates();
-					
-					//Need to return a float[] to stop the cannot invoke getxxx on float primitive,
-					//because a float[] is an object, not a primitive.
-			
-		}
-				//Check loop bracing to ensure proper operation!
-    }
 
 	
 
@@ -311,6 +282,9 @@ public class DrawView extends View
 		
 			circlesArrayY[i] = circlesArrayY[i] + deltay[i];
 			
+			//Collision detection things begin below this line.
+			pythagorasCollisionDetection();
+			
 			if(circlesArrayX[i] > width || circlesArrayX[i] < 0)
 				
 				//So in the line below, this is what is happening: I am changing direction (moving away from wall) By adding negative speed, I keep
@@ -330,9 +304,6 @@ public class DrawView extends View
 				deltay[i] = deltay[i] * -1; // change increment value so that ball bounce off right wall
 				
 			}
-			
-			//Collision detection things begin below this line.
-			pythagorasCollisionDetection();
 		}
 		invalidate();
 	}
@@ -353,4 +324,5 @@ public class DrawView extends View
 		height = h;
 		super.onSizeChanged(w, h, oldw, oldh);
 	}
+	
 } 
